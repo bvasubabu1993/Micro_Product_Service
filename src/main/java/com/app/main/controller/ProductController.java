@@ -3,8 +3,8 @@ package com.app.main.controller;
 import java.util.List;
 import java.util.Optional;
 
+import org.hibernate.cache.spi.support.AbstractReadWriteAccess.Item;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cloud.client.loadbalancer.CompletionContext.Status;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,38 +16,38 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.app.main.entity.Item;
-import com.app.main.service.ItemService;
+import com.app.main.entity.Product;
+import com.app.main.service.ProductService;
 
 @RestController
 @RequestMapping(value = "/product")
-public class ItemController {
+public class ProductController {
 	
 	@Autowired
-	private ItemService itemService;
+	private ProductService productService;
 	
 	@PostMapping("/save")
-	public Item saveItem(@RequestBody Item item) {
-		return itemService.saveItem(item);
+	public Product saveProduct(@RequestBody Product product) {
+		return productService.saveProduct(product);
 		
 	}
 	
 	@GetMapping("/getAll")
-	public List<Item> getAllItems(){
-		return itemService.getAllItems();
+	public List<Product> getAllIProducts(){
+		return productService.getAllProducts();
 		
 	}
 	@GetMapping("/get/{id}")
-	public ResponseEntity<Optional<Item>> getItemById(@PathVariable int id){
-		Optional<Item> item = itemService.getItemById(id);
-		return ResponseEntity.status(HttpStatus.OK).body(item);
+	public ResponseEntity<Optional<Product>> getProductById(@PathVariable int id){
+		Optional<Product> product = productService.getProductById(id);
+		return ResponseEntity.status(HttpStatus.OK).body(product);
 		
 	}
 	
 	@PutMapping("/reduseQuantity/{id}")
 	public ResponseEntity<Void>  reduseQuantity(@PathVariable("id") int productId,
 			@RequestParam int quantity){
-		itemService.reduseQuantity(productId,quantity);
+		productService.reduseQuantity(productId,quantity);
 		return new ResponseEntity<Void>(HttpStatus.OK);
 		
 	}

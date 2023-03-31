@@ -10,11 +10,11 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name="micro_item")
+@Table(name="micro_product")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Item {
+public class Product {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
